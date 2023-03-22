@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\Storage;
 
 class ProductGallery extends Model
 {
@@ -23,14 +24,11 @@ class ProductGallery extends Model
     {
         return $this->belongsTo(Product::class, 'products_id', 'id');
     }
-    public function getPhotoAttribute($value)
-    {
-        return url('storage/'.$value);
-    }
+   
     protected function Photo(): Attribute
     {
-        return Attribute::make(
-            get: fn (string $value) =>  url('storage/'.$value),
+        return new Attribute(
+            get: fn (string $value) => url('storage/'.$value),
         );
     }
 }

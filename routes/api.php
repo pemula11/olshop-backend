@@ -17,3 +17,8 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('products', 'App\Http\Controllers\API\ProductController@all');
+Route::post('checkout', 'App\Http\Controllers\API\CheckoutController@checkout');
+Route::get('transactions/{id}', 'App\Http\Controllers\API\TransactionController@get');
+
